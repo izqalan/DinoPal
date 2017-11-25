@@ -14,6 +14,6 @@ struct customer{
 
 int main()
 {
-
+	
 	return 0;
 }
