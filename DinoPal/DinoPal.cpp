@@ -1,19 +1,46 @@
 #include <iostream>
 #include "DinoPal.h"
+
 using namespace std;
 
-struct invoice{
+struct invoice
+{
 	int Duration;
 	char CurrMonth[10];
+	char name[30];
+	char cell[14];
 };
 
-struct customer{
-	char CustName[30];
-	char CustNo[14];
-}invoice;
+invoice customer;
+
+class userInputs
+{
+public:
+	void getInput()
+	{
+
+		cout << "Name: ";
+		cin >> customer.name;
+		cout << "cell: ";
+		cin >> customer.cell;
+		cout << "Billing month: ";
+		cin >> customer.CurrMonth;
+		cout << "Duration: ";
+		cin >> customer.Duration;
+	}
+
+};
+
 
 int main()
 {
 	
+	userInputs newinput;
+	newinput.getInput();
+
+	double total = CalculateRate(customer.Duration);
+	TotalAmount(total, customer.CurrMonth);
+
+
 	return 0;
 }
