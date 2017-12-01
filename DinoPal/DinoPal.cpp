@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "DinoPal.h"
 
 using namespace std;
@@ -11,6 +12,7 @@ struct invoice
 	char cell[14];
 };
 
+// struct declaration
 invoice customer;
 
 class userInputs
@@ -18,7 +20,6 @@ class userInputs
 public:
 	void getInput()
 	{
-
 		cout << "Name: ";
 		cin >> customer.name;
 		cout << "cell: ";
@@ -34,12 +35,20 @@ public:
 
 int main()
 {
-	
+	// class declaration 
 	userInputs newinput;
+	backend newbackend;
+
+	// func declaration of class userinputs
+	// get user input
 	newinput.getInput();
 
-	double total = CalculateRate(customer.Duration);
-	TotalAmount(total, customer.CurrMonth);
+	// display user input
+	newbackend.userDat(customer.Duration, customer.name, customer.cell, customer.CurrMonth);
+
+	// display total amount
+	double total = newbackend.CalculateRate(customer.Duration);
+	newbackend.TotalAmount(&total, customer.CurrMonth);
 
 
 	return 0;
