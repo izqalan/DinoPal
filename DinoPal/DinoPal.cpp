@@ -6,7 +6,7 @@ using namespace std;
 
 struct invoice
 {
-	int Duration;
+	double *Duration = new double;
 	char CurrMonth[10];
 	char name[30];
 	char cell[14];
@@ -27,7 +27,7 @@ public:
 		cout << "Billing month: ";
 		cin >> customer.CurrMonth;
 		cout << "Duration: ";
-		cin >> customer.Duration;
+		cin >> *customer.Duration;
 	}
 
 };
@@ -37,18 +37,20 @@ int main()
 {
 	// class declaration 
 	userInputs newinput;
-	backend newbackend;
+	double *total = NULL;
+	total = new double;
 
 	// func declaration of class userinputs
 	// get user input
 	newinput.getInput();
 
 	// display user input
-	newbackend.userDat(customer.Duration, customer.name, customer.cell, customer.CurrMonth);
+	userDat(customer.Duration, customer.name, customer.CurrMonth, customer.cell);
 
 	// display total amount
-	double total = newbackend.CalculateRate(customer.Duration);
-	newbackend.TotalAmount(&total, customer.CurrMonth);
+	*total = CalculateRate(customer.Duration);
+	
+	TotalAmount(total, customer.CurrMonth);
 
 
 	return 0;
