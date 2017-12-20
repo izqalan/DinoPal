@@ -1,9 +1,38 @@
 #include <iostream>
+
 using namespace std;
 
+struct invoice
+{
+	double Duration;
+	char CurrMonth[20];
+	char name[30];
+	char cell[20];
+};
+
+class userInputs
+{
+public:
+	void getInput(struct invoice *customer)
+	{
+		cout << "Name: ";
+		cin.get(customer->name, 30);
+		cin.ignore();
+		cout << "cell Number: ";
+		cin.get(customer->cell, 20);
+		cin.ignore();
+		cout << "Billing month: ";
+		cin.get(customer->CurrMonth, 20);
+		cin.ignore();
+		cout << "Airtime (in minutes): ";
+		cin >> customer->Duration;
+	}
+
+};
 
 	double CalculateRate(double *x)
 	{
+		
 		// calculate rate
 		double total;
 		double *rate = new double;
@@ -22,19 +51,18 @@ using namespace std;
 		return total;
 	}
 
-	void TotalAmount(double *total,char mon[10])
+	void TotalAmount(struct invoice *customer, double *total)
 	{
 		// display bills
-
-		cout << "Your bill for " << mon << " is RM" << *total << endl;
+		cout << "\nYour bill for " << customer->CurrMonth << " is RM" << *total << endl;
 	}
 
-	void userDat(double *duration, char name[30], char mon[10], char cell[14])
+	void userDat(struct invoice *customer)
 	{
-		cout << "verification" << endl;
-		cout << "Air time: "<<*duration << endl;
-		cout << "Name: " <<name << endl;
-		cout << "month: " << mon << endl;
-		cout << "Cellphone number: " <<cell << endl;
+		cout << "=======verification=========" << endl;
+		cout << "Airtime: "<< customer->Duration << " minutes" << endl;
+		cout << "Name: " << customer->name << endl;
+		cout << "month: " << customer->CurrMonth << endl;
+		cout << "Cellphone number: " << customer->cell << endl;
 	}
 

@@ -4,54 +4,29 @@
 
 using namespace std;
 
-struct invoice
-{
-	double *Duration = new double;
-	char CurrMonth[10];
-	char name[30];
-	char cell[14];
-};
-
-// struct declaration
-invoice customer;
-
-class userInputs
-{
-public:
-	void getInput()
-	{
-		cout << "Name: ";
-		cin >> customer.name;
-		cout << "cell: ";
-		cin >> customer.cell;
-		cout << "Billing month: ";
-		cin >> customer.CurrMonth;
-		cout << "Duration: ";
-		cin >> *customer.Duration;
-	}
-
-};
-
-
 int main()
 {
+	cout << "=== Thank you for subscribing to DinoPal telco ===" << endl;
+	cout << "===== Please enter your credentials =====" << endl;
+
 	// class declaration 
 	userInputs newinput;
 	double *total = NULL;
 	total = new double;
 
 	// func declaration of class userinputs
-	// get user input
-	newinput.getInput();
+	// get user input from public class function
+	struct invoice userdetails;
+	newinput.getInput(&userdetails);
 
-	// display user input
-	userDat(customer.Duration, customer.name, customer.CurrMonth, customer.cell);
+	// referencing customer struct as userdetails && display user input
+	userDat(&userdetails);
 
 	// display total amount
-	*total = CalculateRate(customer.Duration);
+	*total = CalculateRate(&userdetails.Duration);
 	
-	TotalAmount(total, customer.CurrMonth);
+	TotalAmount(&userdetails, total);
 
-
+	system("pause");
 	return 0;
 }
