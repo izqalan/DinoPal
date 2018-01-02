@@ -1,0 +1,6 @@
+				=======Your Billing details=========
+
+				Airtime: 100 minutes
+				Name: jamal
+				Month: jan
+				Cellphone number: 3234521244

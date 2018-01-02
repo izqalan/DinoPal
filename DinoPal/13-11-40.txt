@@ -1,0 +1,6 @@
+				=======Your Billing details=========
+
+				Airtime: 1 minutes
+				Name: jamal
+				Month: june
+				Cellphone number: 01294232

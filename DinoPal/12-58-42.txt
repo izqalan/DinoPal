@@ -1,0 +1,6 @@
+				=======Your Billing details=========
+
+				Airtime: 212 minutes
+				Name: jamal
+				Month: JAnuary
+				Cellphone number: 0192432

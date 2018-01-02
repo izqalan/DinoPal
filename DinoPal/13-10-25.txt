@@ -1,0 +1,6 @@
+				=======Your Billing details=========
+
+				Airtime: 1260 minutes
+				Name: jamal
+				Month: june
+				Cellphone number: 02932123
