@@ -1,6 +1,0 @@
-=======Your Billing details=========
-
-Airtime: 531 minutes
-Name: jonny
-month: june
-Cellphone number: 01234212

@@ -1,6 +1,6 @@
 				=======Your Billing details=========
 
-				Airtime: 89 minutes
+				Airtime: 60 minutes
 				Name: jamal
 				Month: january
-				Cellphone number: 023214243
+				Cellphone number: 102343212
