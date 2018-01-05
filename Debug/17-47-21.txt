@@ -1,6 +1,0 @@
-				=======Your Billing details=========
-
-				Airtime: 60 minutes
-				Name: jamal
-				Month: january
-				Cellphone number: 102343212
