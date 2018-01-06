@@ -107,7 +107,8 @@ public:
 	void reciept(struct invoice *customer, double *total)
 	{
 		//	filename will in saved in time 24hrs time format
-		//	this is to prevent overwiting previous customer input
+		//	this is to prevent overwiting previous customer information
+
 		time_t getTime;	// get current time
 		struct tm now;
 		time(&getTime);
@@ -115,21 +116,23 @@ public:
 		char strTime[50]; // string for filename 
 
 		//note that %F is not compitable with windows OS
-		strftime(strTime, 50, "%H-%M-%S.txt", &now);
-
+		strftime(strTime, 50, "-%H-%M-%S.txt", &now);
+		char filename[50];
+		strcpy_s(filename, customer->name);	// prevent overwiting name 
+		strcat_s(filename, strTime);
 		//const char *path="C:\\Users\\%USERPROFILE%\\Desktop\\";
 
 		ofstream record;
-		record.open(strTime);
+		record.open(filename);
 
 		record << "\t\t\t\t=======Your Billing details=========\n" << endl;
 		record << "\t\t\t\tAirtime: " << customer->Duration << " minutes" << endl;
 		record << "\t\t\t\tName: " << customer->name << endl;
 		record << "\t\t\t\tMonth: " << customer->CurrMonth << endl;
-		record << "\t\t\t\tCellphone number: 0" << customer->cell << endl;
+		record << "\t\t\t\tCellphone number: +60 " << customer->cell << endl;
 		record << "\n\t\t\t\tYour bill for " << customer->CurrMonth << " is RM" << *total << "\n" << endl;
 
-		cout << "\t\t\t\tThank you. Your record has been saved as "<< strTime << endl;
+		cout << "\t\t\t\tThank you. Your record has been saved as "<< filename << endl;
 
 		record.close();
 	}
