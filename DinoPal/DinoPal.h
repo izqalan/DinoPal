@@ -3,12 +3,15 @@
 #include <time.h>
 #include <cctype>
 #include <lmcons.h>
+#include <Shellapi.h>
+#include <string>
 
 using namespace std;
 
 struct invoice
 {
 	double Duration = NULL;
+	char Custid[10];
 	char CurrMonth[20];
 	char name[30];
 	int cell = NULL;
@@ -20,22 +23,27 @@ public:
 	
 	void getInput(struct invoice *customer)
 	{
-		cout << "\t\t\t\tName: ";
+		cout << "Name: ";
 		cin.get(customer->name, 30);
 		cin.ignore();
-		cout << "\n\t\t\tHello Encik/puan " << customer->name << "\n" <<endl;
+
+		cout << "Enter 4 character User ID: ";
+		cin.get(customer->Custid, 10);
+		cin.ignore();
+
+		cout << "\nHello Encik/puan " << customer->name << "\n" <<endl;
 		Sleep(800);
-		cout << "\t\t\tplease enter necessary details" << endl;
+		cout << "please enter necessary details" << endl;
 		Sleep(800);
 		//cin.get(customer->cell, 20);
 		while (customer->cell == NULL)
 		{
 			do{
-				cout << "\t\t\t\tMobile Number: ";
+				cout << "Mobile Number: ";
 				cin >> customer->cell;
 				if (cin.fail())
 				{
-					cout << "\a\t\t\t\t\tInvalid input" << endl;
+					cout << "\aInvalid input" << endl;
 					cin.clear();
 					cin.ignore();
 				}
@@ -45,18 +53,18 @@ public:
 			} while (customer->cell == NULL || cin.fail());
 		}
 
-		cout << "\t\t\t\tBilling month: ";
+		cout << "Billing month: ";
 		cin.get(customer->CurrMonth, 20);
 		cin.ignore();
 		
 		while (customer->Duration == NULL)
 		{
 			do{
-				cout << "\t\t\t\tAirtime (in minutes): ";
+				cout << "Airtime (in minutes): ";
 				cin >> customer->Duration;
 				if (cin.fail())
 				{
-					cout << "\t\t\t\t\aInvalid Input" << endl;
+					cout << "\aInvalid Input" << endl;
 					cin.clear();
 					cin.ignore();
 				}
@@ -65,6 +73,7 @@ public:
 			} while (customer->Duration == NULL && cin.fail());
 		}
 	}
+
 
 	double CalculateRate(double *x)
 	{
@@ -89,26 +98,28 @@ public:
 	void TotalAmount(struct invoice *customer, double *total)
 	{
 		// display bills
-		cout << "\n\t\t\t\tYour bill for " << customer->CurrMonth << " is RM" << *total << "\n" << endl;
+		cout << "\nYour bill for " << customer->CurrMonth << " is RM" << *total << "\n" << endl;
 		
 	}
 
 	void userDat(struct invoice *customer)
 	{
-		cout << "\t\t\t\t=======verification=========" << endl;
-		cout << "\t\t\t\tAirtime: " << customer->Duration << " minutes" << endl;
-		cout << "\t\t\t\tName: " << customer->name << endl;
-		cout << "\t\t\t\tmonth: " << customer->CurrMonth << endl;
-		cout << "\t\t\t\tCellphone number: 0" << customer->cell << endl;
-
+		cout << "=============verification===============" << endl;
+		cout << "Airtime: " << customer->Duration << " minutes" << endl;
+		cout << "Name: " << customer->name << endl;
+		cout << "month: " << customer->CurrMonth << endl;
+		cout << "Mobile number: +60 " << customer->cell << endl;
+		Sleep(1000);
 		
 	}
 
 	void reciept(struct invoice *customer, double *total)
 	{
-		//	filename will in saved in time 24hrs time format
-		//	this is to prevent overwiting previous customer information
+		/*	24hrs file format
 
+		//	filename will be in saved in time 24hrs time format
+		//	this is to prevent overwiting previous customer information
+		
 		time_t getTime;	// get current time
 		struct tm now;
 		time(&getTime);
@@ -122,29 +133,64 @@ public:
 		strcat_s(filename, strTime);
 		//const char *path="C:\\Users\\%USERPROFILE%\\Desktop\\";
 
+		*/
+
+		// remove this bit if you want to use ^ file format
+		// id based file format
+
+		char filename[10];
+		strcpy_s(filename, customer->Custid);
+		strcat_s(filename, ".txt");
+		
 		ofstream record;
 		record.open(filename);
 
-		record << "\t\t\t\t=======Your Billing details=========\n" << endl;
-		record << "\t\t\t\tAirtime: " << customer->Duration << " minutes" << endl;
-		record << "\t\t\t\tName: " << customer->name << endl;
-		record << "\t\t\t\tMonth: " << customer->CurrMonth << endl;
-		record << "\t\t\t\tCellphone number: +60 " << customer->cell << endl;
-		record << "\n\t\t\t\tYour bill for " << customer->CurrMonth << " is RM" << *total << "\n" << endl;
+		record << "=======Your Billing details=========\n" << endl;
+		record << "Airtime: " << customer->Duration << " minutes" << endl;
+		record << "Name: " << customer->name << endl;
+		record << "User ID: " << customer->Custid << endl;
+		record << "Month: " << customer->CurrMonth << endl;
+		record << "Cellphone number: +60 " << customer->cell << endl;
+		record << "\nYour bill for " << customer->CurrMonth << " is RM" << *total << "\n" << endl;
 
-		cout << "\t\t\t\tThank you. Your record has been saved as "<< filename << endl;
+		cout << "Thank you. Your record has been saved as "<< filename << endl;
 
 		record.close();
+	}
+
+
+	int retCust()
+	{
+		// returning customer
+		cout << "*Please Enter Your ID: ";
+		char DupeID[10];
+		cin >> DupeID;
+		cin.ignore();
+	
+		char filename[10];
+		char notepad[15] = "notepad.exe ";
+		char txt[5] = ".txt";
+		strcpy_s(filename, DupeID);
+		
+		strcat_s(filename, txt);
+		strcat(notepad, filename);
+
+		fstream file(filename);
+		if (!file.is_open())
+		{
+			cout << "file does not exist :(" << endl;
+		}
+		else
+		{
+			system(notepad);
+			
+		}
+	
+	
+		exit(1);
+		return 0;
 	}
 
 	
 };
 
-void path()
-{
-	CHAR pathname[UNCLEN + 1];
-	DWORD path_len = UNCLEN + 1;
-	// GetComputerName((TCHAR*)pathname, &path_len);
-	GetUserName((TCHAR*)pathname, &path_len);
-	wcout << pathname << endl;
-}

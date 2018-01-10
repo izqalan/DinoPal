@@ -7,17 +7,26 @@ using namespace std;
 
 int main()
 {
-	cout << "\t\t\t=== Thank you for subscribing to DinoPal telco Malaysia===" << endl;
-	cout << "\t\t\t\t===== Please enter your credentials =====" << endl;
-	
+	cout << "=== Thank you for subscribing to DinoPal telco Malaysia===" << endl;
 	// class declaration
 	userDetails write;
 	double *total = NULL;
 	total = new double;
 
 	// get user input from public class function
+	bool x = false;
 	struct invoice userdetails;
-	
+	cout << "Please press [1] you're a returning customer [2] for else" << endl;
+	cin >> x;
+	cin.clear();
+	cin.ignore();
+
+	if (x == true)
+	{
+		write.retCust();
+	}
+	cout << "===== Please enter your credentials =====" << endl;
+	Sleep(500);
 	write.getInput(&userdetails);
 
 	// referencing customer struct as userdetails && display user input
