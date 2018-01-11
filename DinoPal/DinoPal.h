@@ -3,7 +3,6 @@
 #include <time.h>
 #include <cctype>
 #include <lmcons.h>
-#include <Shellapi.h>
 #include <string>
 
 using namespace std;
@@ -21,8 +20,9 @@ class userDetails
 {
 public:
 	
-	void getInput(struct invoice *customer)
+	void getCaller(struct invoice *customer)
 	{
+		
 		cout << "Name: ";
 		cin.get(customer->name, 30);
 		cin.ignore();
@@ -35,7 +35,7 @@ public:
 		Sleep(800);
 		cout << "please enter necessary details" << endl;
 		Sleep(800);
-		//cin.get(customer->cell, 20);
+		
 		while (customer->cell == NULL)
 		{
 			do{
@@ -156,6 +156,7 @@ public:
 		cout << "Thank you. Your record has been saved as "<< filename << endl;
 
 		record.close();
+
 	}
 
 
@@ -172,9 +173,9 @@ public:
 		char txt[5] = ".txt";
 		strcpy_s(filename, DupeID);
 		
-		strcat_s(filename, txt);
-		strcat(notepad, filename);
-
+		strcat_s(filename,14, txt);
+		strcat_s(notepad, 24, filename); // notepad.exe filename.txt
+		
 		fstream file(filename);
 		if (!file.is_open())
 		{
@@ -182,8 +183,9 @@ public:
 		}
 		else
 		{
-			system(notepad);
-			
+			cout << "opening file" << endl;
+
+			system(notepad);	// pop up notepad.exe
 		}
 	
 	

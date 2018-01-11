@@ -27,7 +27,7 @@ int main()
 	}
 	cout << "===== Please enter your credentials =====" << endl;
 	Sleep(500);
-	write.getInput(&userdetails);
+	write.getCaller(&userdetails);
 
 	// referencing customer struct as userdetails && display user input
 	for (int i = 0; i < 3; i++)
